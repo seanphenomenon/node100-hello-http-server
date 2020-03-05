@@ -6,13 +6,13 @@ var nightmare;
 const url = 'http://localhost:8080';
 
 describe('hello-express', function () {
-  this.timeout(6500);
+  this.timeout(20000);
   this.slow(3000);
-  
+
   beforeEach(()=> {
     nightmare = Nightmare();
   })
-  
+
   it('should have the correct page title', () =>
     nightmare
       .goto(url)
@@ -22,12 +22,15 @@ describe('hello-express', function () {
       .end()
       .then(function (text) {
         expect(text).to.equal('Hello World');
+        done()
       })
+
   );
-  
+
   it('returns the correct status code', () => axios.get('http://localhost:8080')
     .then((response) => {
         return expect(response.status === 200)
+
     })
   )
 });
